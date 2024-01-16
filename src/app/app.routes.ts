@@ -1,24 +1,28 @@
 import { Routes } from '@angular/router';
 
 import {LoginComponent} from "./pages/login/login.component";
-import { RegisterComponent} from "./pages/register/register.component";
-import {MainComponent} from "./pages/main/main.component";
+
 
 const routeConfig: Routes = [
   {
-    path: '',
+    path: 'login',
     component: LoginComponent,
     title: 'Login page'
   },
   {
     path: 'register',
-    component: RegisterComponent,
+    loadComponent: () => import('./pages/register/register.component').then(mod => mod.RegisterComponent),
     title: 'Register page'
   },
   {
     path: 'main',
-    component: MainComponent,
+    loadComponent: () => import('./pages/main/main.component').then(mod => mod.MainComponent),
     title: 'Main page'
+  },
+  {
+    path: '**',
+    component: LoginComponent,
+    title: 'Login page'
   },
 ];
 
